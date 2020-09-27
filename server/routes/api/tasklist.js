@@ -17,10 +17,13 @@ async function loadTasksCollection(){
         
     }
     return client.db("tasklist").collection("task");
+    
+    
 }
 
 // to read the task
 router.get('/',async(req,res)=>{
+    loadTasksCollection().catch(console.error)
     const task= await loadTasksCollection()
     res.send(await task.find({}).toArray())
     
@@ -29,9 +32,12 @@ router.get('/',async(req,res)=>{
 
 //to insert the task
 router.post('/',async(req,res)=>{
+    
     const task=await loadTasksCollection()
+    
     await task.insertOne({
-        text:req.body.text
+        text:req.body.text,
+        date:new Date()
     });
     res.status(201).send();
 });
@@ -46,4 +52,3 @@ router.delete('/:id',async(req,res)=>{
 
 
 module.exports=router
-
