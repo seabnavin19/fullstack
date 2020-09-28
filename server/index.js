@@ -11,6 +11,14 @@ app.use(cors());
 const task=require("./routes/api/tasklist");
 app.use("/api/tasklist",task);
 
+
+//to pic server/public as static folder
+if(process.env.NODE_ENV==='production'){
+
+    app.use(express.static(__dirname+'/public/'));
+
+    app.get(/.*/,(req,res)=>res.sendFile(__dirname+'/public/index.html'));
+}
 //to set the port 
 const port=process.env.PORT || 5000;
 app.listen(port,()=>console.log("serer"));
