@@ -7,9 +7,7 @@
       <input class="form-control mr-sm-2 col-6 m-5" type="text" placeholder="Enter new Task" v-model="text">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Submit</button>
     </form>
-    <div class="alert alert-danger" role="alert" v-if="!tasks.length">
-        Error 404
-</div>
+   
     <div class="jumbotron jumbotron m-5 bg-info " v-for="i in tasks" :key="i" @dblclick="deletetasks(i._id)">     
   <div class="container" >
       <h1 class="display-5">{{i.text}}</h1>
